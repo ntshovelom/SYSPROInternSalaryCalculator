@@ -11,7 +11,6 @@ namespace SYSPROInternSalaryCalculator.Models
     {
 
         public int Id { set; get; }
-
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "First Name")]
         public string Firstname { set; get; }
@@ -26,24 +25,14 @@ namespace SYSPROInternSalaryCalculator.Models
         [Display(Name = "ID Number")]
         [StringLength(maximumLength:13,MinimumLength =13,ErrorMessage ="ID Number must be 13 characters")]
         public string IDNumber { set; get; }
-
         public byte[] Photo { get; set; }
-
         [Required]
         [Display(Name = "Role")]
         public Role Role { set; get; }
 
         public double? TotalSalary()
         {
-            double? salary = 0;
             SysproDBContext db = new SysproDBContext();
-
-            /*List<Intern_Task> tasks = db.Intern_Tasks.Where(i => i.Intern.Id == Id).ToList();
-
-            foreach(Intern_Task t in tasks)
-            {
-                salary += t.Salary;
-            }*/
             return db.Intern_Tasks.Where(i => i.Intern.Id == Id).Sum(r => (double?)r.Salary);
             
             
@@ -51,18 +40,14 @@ namespace SYSPROInternSalaryCalculator.Models
 
         public double? TotalSalary(DateTime dateFrom, DateTime dateTo)
         {
-            double? salary = 0;
             SysproDBContext db = new SysproDBContext();
             return db.Intern_Tasks.Where(i => i.Intern.Id == Id && i.Date >= dateFrom && i.Date <= dateTo).Sum(r => (double?)r.Salary);
-
 
         }
         public double? TotalHoursWorked(DateTime dateFrom, DateTime dateTo)
         {
-            double? hours = 0;
-            SysproDBContext db = new SysproDBContext();
 
-            
+            SysproDBContext db = new SysproDBContext();
             return db.Intern_Tasks.Where(i => i.Intern.Id == Id && i.Date >= dateFrom && i.Date <= dateTo).Sum(r => (double?)r.HoursWorked);
 
 
