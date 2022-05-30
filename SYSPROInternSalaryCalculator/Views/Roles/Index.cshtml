@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SYSPROInternSalaryCalculator.Models.Role>
+
+    <div class="syspage_heading">
+        <h2 class="text-center">Roles</h2>
+    </div>
+
+<div class="text-right right">
+    <span>
+        <br />
+        @Html.ActionLink("New Role", "Create", "Roles", new { @class = "btn btn-primary" })
+
+
+    </span>
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RatePerHour)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        string finalRate = item.RatePerHour.ToString("#,##0");
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => finalRate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

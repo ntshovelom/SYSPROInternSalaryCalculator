@@ -1,0 +1,73 @@
+﻿@using SYSPROInternSalaryCalculator.Models
+@model SYSPROInternSalaryCalculator.Models.Intern_Task
+
+@using (Html.BeginForm())
+{
+    string date = Model.Date.ToString("yyyy/MM/dd");
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <div class="syspage_heading">
+        <h2 class="text-center">Update Time Capture</h2>
+    </div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Intern, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select class="form-control" name="intern_id">
+                @foreach (Intern intern in (List
+                <Intern>
+                    )ViewData["interns"])
+                {
+                    <option @(intern.Id == Model.Intern.Id ? "selected" : "") value="@intern.Id">@intern.Firstname @intern.Lastname</option>
+
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Task, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select class="form-control" name="task_id">
+                @foreach (Task task in (List
+                <Task>
+                    )ViewData["tasks"])
+                {
+                    <option @(task.Id == Model.Task.Id ? "selected" : "") value="@task.Id">@task.Name</option>
+
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoursWorked, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HoursWorked, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HoursWorked, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SYSPROInternSalaryCalculator.Models.Intern_Task>
+
+
+    <div class="syspage_heading">
+        <h2 class="text-center">Captured Time</h2>
+    </div>
+
+<div class="text-right right">
+    <span>
+        <br />
+        @if (ViewData["Message"] != null)
+        {
+            <div class="alert alert-danger">
+                @ViewData["Message"]
+            </div>
+        }
+        else
+        {
+            @Html.ActionLink("Capture Time", "Capture", "Intern_Tasks", new { @class = "btn btn-primary" })
+        }
+
+
+
+    </span>
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Intern)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Task)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoursWorked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        string finalSalary = item.Salary.ToString("#,##0");
+        string date = item.Date.ToString("dd MMMM yyyy");
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Intern.Firstname) @Html.DisplayFor(modelItem => item.Intern.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.HoursWorked)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => finalSalary)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
