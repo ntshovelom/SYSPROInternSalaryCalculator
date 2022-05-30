@@ -313,7 +313,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\CreateTest.cshtml" />
     <Content Include="Views\Interns\Index.cshtml" />
     <Content Include="Views\Interns\Create.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
