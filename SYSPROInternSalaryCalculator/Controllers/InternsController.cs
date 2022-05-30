@@ -11,7 +11,6 @@ namespace SYSPROInternSalaryCalculator.Controllers
     public class InternsController : Controller
     {
         public  SysproDBContext db = new SysproDBContext();
-        // GET: Interns
         public ActionResult Index()
         {
 
@@ -25,11 +24,9 @@ namespace SYSPROInternSalaryCalculator.Controllers
         public ActionResult Create()
         {
             var roles = db.Roles.ToList();
-            System.Diagnostics.Debug.WriteLine("SIZE: " + roles.Count);
+            //user can not add intern if no role has been added, so we redirect back to index
             if (roles.Count <= 0)
             {
-               
-               
                 return RedirectToAction("Index", new { });
             }
             ViewData["roles"] = roles;

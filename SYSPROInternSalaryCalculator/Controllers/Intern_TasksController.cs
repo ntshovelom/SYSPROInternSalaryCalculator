@@ -15,6 +15,7 @@ namespace SYSPROInternSalaryCalculator.Controllers
         public ActionResult Index()
         {
             
+            //user can not capture time is no task or intern has been added
             if(db.Tasks.Count() < 1 || db.Interns.Count() < 1)
             {
                 ViewData["Message"] = "Please add interns and tasks before capturing time";
@@ -33,9 +34,6 @@ namespace SYSPROInternSalaryCalculator.Controllers
         public ActionResult Capture(int intern_id, int task_id, int hoursWorked, DateTime date)
         {
             Intern intern = db.Interns.Include(r => r.Role).Where(i => i.Id == intern_id).FirstOrDefault();
-
-
-
             Intern_Task it = new Intern_Task()
             {
                 Intern = intern,

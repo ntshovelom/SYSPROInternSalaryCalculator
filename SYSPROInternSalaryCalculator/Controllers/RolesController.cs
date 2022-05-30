@@ -11,7 +11,7 @@ namespace SYSPROInternSalaryCalculator.Controllers
     public class RolesController : Controller
     {
         SysproDBContext db = new SysproDBContext();
-        // GET: Role
+        
         public ActionResult Index()
         {
             return View(db.Roles.ToList());
@@ -25,12 +25,7 @@ namespace SYSPROInternSalaryCalculator.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include ="Name,RatePerHour")] Role role)
         {
-            System.Diagnostics.Debug.WriteLine("Role: " +role.Name );
-           /* Role role1 = new Role()
-            {
-                Name = name,
-                RatePerHour = ratePerHour
-            };*/
+            
             db.Roles.Add(role);
            db.SaveChanges();
 

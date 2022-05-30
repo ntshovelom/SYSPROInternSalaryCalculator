@@ -61,10 +61,12 @@ namespace SYSPROInternSalaryCalculator.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
+            //validates if username and password are both admin
             if(username.Equals("admin") && password.Equals("admin"))
             {
                 return RedirectToAction("Index", new { });
             }
+            //returns errror message if validation fails
             ViewData["Message"] = "Incorrect username or password.";
             return View();
         }
